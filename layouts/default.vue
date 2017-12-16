@@ -1,6 +1,9 @@
 <template>
   <div>
-    <nuxt/>
+    <el-container>
+      <el-header>RSS Viewer</el-header>
+      <el-main><nuxt /></el-main>
+    </el-container>
   </div>
 </template>
 
