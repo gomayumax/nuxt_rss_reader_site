@@ -1,13 +1,12 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="8" v-for="file in data" :key="o" :offset="index > 0 ? 2 : 0">
+      <el-col :span="8" v-for="item in data" :key="o" :offset="index > 0 ? 2 : 0">
         <el-card :body-style="{ padding: '0px' }">
-          <img v-bind:src="'http://xn--3ur52o1bb7099d.xn--u9jb933vm9i.com/images/' + file.name + ''" class="image" />
           <div style="padding: 14px;">
-            <span>Yummy hamburger</span>
+            <span>{{item.title[0]}}</span>
             <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
+              <time class="time">{{ item.pubDate[0] }}</time>
               <el-button type="text" class="button">Operating button</el-button>
             </div>
           </div>
@@ -22,9 +21,13 @@
 
   export default {
     asyncData ({params}, callback) {
-      axios.get(`http://xn--3ur52o1bb7099d.xn--u9jb933vm9i.com/images.json`)
+      axios.get(`https://rss.allabout.co.jp/aa/latest/ch/health/`)
         .then((res) => {
-          callback(null, {data: res.data.general})
+          var parseString = require('xml2js').parseString
+          var xml = res.data
+          parseString(xml, (message, xmlres) => {
+            callback(null, {data: xmlres.rss.channel[0].item})
+          })
         })
     },
     data () {
