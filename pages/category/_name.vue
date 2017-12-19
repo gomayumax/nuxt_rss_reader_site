@@ -1,18 +1,15 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="8" v-for="item in data" :key="o" :offset="index > 0 ? 2 : 0">
-        <el-card :body-style="{ padding: '0px' }">
-          <div style="padding: 14px;">
-            <span>{{item.title[0]}}</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ item.pubDate[0] }}</time>
-              <el-button type="text" class="button">Operating button</el-button>
-            </div>
+    <el-col :span="8" v-for="item in data" :key="o" :offset="index > 0 ? 2 : 0">
+      <el-card :body-style="{ padding: '0px' }">
+        <div style="padding: 14px;">
+          <span>{{item.title[0]}}</span>
+          <div class="bottom clearfix">
+            <time class="time">{{ item.pubDate[0] }}</time>
           </div>
-        </el-card>
-      </el-col>
-    </el-row>
+        </div>
+      </el-card>
+    </el-col>
   </div>
 </template>
 
@@ -46,17 +43,6 @@
   .bottom {
     margin-top: 13px;
     line-height: 12px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    height: 120px;
-    display: block;
   }
 
   .clearfix:before,
