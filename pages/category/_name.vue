@@ -21,7 +21,7 @@
 
   export default {
     asyncData ({params}, callback) {
-      axios.get(`https://rss.allabout.co.jp/aa/latest/ch/health/`)
+      axios.get(`https://rss.allabout.co.jp/aa/latest/ch/${params.name}`)
         .then((res) => {
           var parseString = require('xml2js').parseString
           var xml = res.data
@@ -29,11 +29,10 @@
             callback(null, {data: xmlres.rss.channel[0].item})
           })
         })
-    },
-    data () {
-      return {
-        currentDate: new Date()
-      }
+        .catch((e) => {
+          var result = { statusCode: 404, message: 'ページが見つかりません' }
+          callback(result)
+        })
     }
   }
 </script>
